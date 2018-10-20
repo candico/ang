@@ -1,7 +1,7 @@
 ﻿<!---<cfset request.layout = false />--->
 <cfset environment = getEnvironment()>
 <cfswitch expression="#environment#">
-	<cfcase value="local,local.croesev">
+	<cfcase value="local,local.croesev,local.ec-home">
     <!---no mail--->
    
     

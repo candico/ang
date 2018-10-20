@@ -81,7 +81,7 @@
 <cfoutput>
 
 <cfswitch expression="#environment#">
-    <cfcase value="local,local.croesev">
+    <cfcase value="local,local.croesev,local.ec-home">
     <cfset request.layout = false />
     <!---no mail--->
     <!---<cfset dbLog(authenticatedUser, shortError)>--->
