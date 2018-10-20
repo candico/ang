@@ -1,0 +1,287 @@
+<!-- <cfoutput> -->
+<form name="viewPrepForm" id="viewPrepForm" class="form-horizontal" novalidate>
+<input type="hidden" name="evaluation_id" id="evaluation_id" value="{{data.evaluation_id}}" />
+    
+    <div class="row">  
+        
+        <div class="col-sm-4">
+        
+            <div class="panel panel-default fieldset-panel">
+            
+            	<div class="panel-body">
+            
+                    <fieldset>
+                        <legend class="scheduler-border">{{ js.KEY_DATA }}</legend> 
+                        
+                 <!--       <div class="form-group" style="background-color:pink">	
+                            <label for="type_id" class="col-sm-3 control-label"><span class="label label-warning-alt">ID</span></label>     
+                             <div class="col-sm-9 form-control-div label-gap">                      
+                            <p class="form-control-static">{{ data.eval_id }}</p>
+                            </div>
+                        </div>  -->
+                       
+                        <div class="col-sm-3 text-right"><span class="label label-primary-alt">ID</span> </div>
+                        <div class="col-sm-8 label-gap">
+                            {{ data.eval_id }}					
+                        </div>  
+                        
+    <!--                    <div class="form-group">	
+                            <label for="type_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ js.STATUS }}</span></label>                          
+                             <div class="col-sm-9 form-control-div label-gap"> 
+                            <p class="form-control-static">{{ data.status }}</p>
+                            </div>
+                        </div>  -->
+                        
+                        <div class="col-sm-3 text-right"  style="background-color:pink"><span class="label label-primary-alt">{{ js.STATUS }}</span> </div>
+                        <div class="col-sm-8 label-gap" style="background-color:lightblue">
+                            {{ data.status }}					
+                        </div>                                     
+                        
+     <!--                   <div class="form-group" ng-class="{'has-error':!futureValidityCheck('type_id')}">	
+                            <label for="type_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ js.TYPE }} *</span></label>                          
+                            <div class="col-sm-8 form-control-div label-gap">                  
+                                <p class="form-control-static">{{js[evalType.code]}}</p>
+                            </div>
+                        </div> --> 
+                        
+                        <div class="col-sm-3 text-right"><span class="label label-primary-alt">{{ js.TYPE }}</span> </div>
+                        <div class="col-sm-8 label-gap">
+                            {{js[evalType.code]}}					
+                        </div>                      
+                        
+                        
+        <!--              <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVAL_PERIOD }} *</span></label>                         
+                            <div class="col-sm-9 form-control-div label-gap"> 
+                                 <p class="form-control-static">{{data.eval_start_on || 'N/A'}} &gt; {{data.eval_end_on || 'N/A'}}</p>                            
+                            </div> 
+                        </div>   -->
+                        
+                        <div class="col-sm-3 text-right"><span class="label label-primary-alt">{{ lib.EVAL_PERIOD }}</span> </div>
+                        <div class="col-sm-8 label-gap">
+                            {{data.eval_start_on || 'N/A'}} &gt; {{data.eval_end_on || 'N/A'}}					
+                        </div>                        
+                                        
+                    </fieldset> 
+                
+                </div>  <!--end panel body--> 
+                
+			</div>  <!--end panel --> 
+            
+            <div class="panel panel-default fieldset-panel">
+            
+            	<div class="panel-body">                                     
+            
+                    <fieldset>                
+                        <legend class="scheduler-border">{{ lib.TIMETABLE }}</legend>    
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.PREP_PHASE }} *</span></label>  
+                            <div class="col-sm-9 form-control-div label-gap"> 
+                                 <p class="form-control-static">{{data.prep_phase_start_on || 'N/A'}} &gt; {{data.prep_phase_end_on || 'N/A'}}</p>
+                            </div>  
+                        </div>                     
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.ASSESS_PHASE }} *</span></label>  
+                            <div class="col-sm-9 form-control-div label-gap"> 
+                                 <p class="form-control-static">{{data.assess_phase_start_on || 'N/A'}} &gt; {{data.assess_phase_end_on || 'N/A'}}</p>
+                            </div>  
+                        </div>       
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.RATING_PHASE }} *</span></label>                          
+                            <div class="col-sm-9 form-control-div label-gap"> 
+                                <p class="form-control-static">{{data.rating_phase_start_on || 'N/A'}} &gt; {{data.rating_phase_end_on || 'N/A'}}</p>
+                            </div> 
+                        </div>  
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.CLOSING_PHASE }} *</span></label>  
+                            <div class="col-sm-9 form-control-div label-gap"> 
+                                <p class="form-control-static">{{data.closing_phase_start_on || 'N/A'}} &gt; {{data.closing_phase_end_on || 'N/A'}}</p>
+                            </div> 
+                        </div>   
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"><span class="label label-primary-alt">{{ lib.PROBATION_PHASE }}</span></label>  
+                            <div class="col-sm-9 form-control-div label-gap"> 
+                                 <p class="form-control-static">{{data.probation_phase_start_on || 'N/A'}} &gt; {{data.probation_phase_end_on || 'N/A'}}</p>
+                            </div> 
+                        </div>                                                                                                         
+                        
+                    </fieldset>
+                    
+				</div>  <!--end panel body-->                  
+                
+            </div> <!--end panel --> 
+        
+        </div>  <!--end col 1-->          
+        
+        <div class="col-sm-4">
+        
+            <div class="panel panel-default fieldset-panel">
+            
+            	<div class="panel-body">                                 
+            
+                    <fieldset>
+                        <legend class="scheduler-border">{{ lib.PARTICIPANTS }}</legend>                     
+                        
+                        <div class="form-group" ng-class="{'has-error':!futureValidityCheck('evaluee_id')}">	
+                            <label for="evaluee_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVM_EVALUEE }} *</span></label>  
+                            <div class="col-sm-8 form-control-div label-gap">  
+                                <p class="form-control-static">{{evaluee.name}}</p>
+                            </div>
+                        </div>                                     
+                        
+                        <div class="form-group" ng-class="{'has-error':!futureValidityCheck('supervisor_id')}">	                   
+                            <label for="supervisor_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVM_SUPERVISOR }} *</span></label>  
+                            <div class="col-sm-8 form-control-div label-gap">                  
+                                <p class="form-control-static">{{supervisor.name}}</p>
+                            </div>     
+                        </div> 
+                        
+                        <div class="form-group" ng-class="{'has-error':!futureValidityCheck('contributor_1_id')}">	
+                            <label for="contributor_1_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVM_CONTRIBUTOR }} 1 *</span></label>  
+                            <div class="col-sm-8 form-control-div label-gap">                  
+                                <p class="form-control-static">{{contributor_1.name}}</p>
+                            </div>
+                        </div>  
+                        
+                        <div class="form-group" ng-class="{'has-error':!futureValidityCheck('contributor_2_id')}">	
+                            <label for="contributor_2_id" class="col-sm-3 control-label"><span class="label label-primary-alt">{{ lib.EVM_CONTRIBUTOR }} 2</span></label>  
+                            <div class="col-sm-8 form-control-div label-gap">                  
+                                <p class="form-control-static">{{contributor_2.name}}</p>
+                            </div>
+                        </div>    
+                        
+                        <div class="form-group" ng-class="{'has-error':!futureValidityCheck('contributor_3_id')}">	
+                            <label for="contributor_3_id" class="col-sm-3 control-label"><span class="label label-primary-alt">{{ lib.EVM_CONTRIBUTOR }} 3</span></label>  
+                            <div class="col-sm-8 form-control-div label-gap">                  
+                                <p class="form-control-static">{{contributor_3.name}}</p>
+                            </div>
+                        </div>  
+                                            
+                        <div class="form-group" ng-class="{'has-error':!futureValidityCheck('preparator_id')}">	
+                            <label for="preparator_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVM_PREPARATOR }} *</span></label>  
+                            <div class="col-sm-8 form-control-div label-gap">                  
+                               <p class="form-control-static">{{preparator.name}}</p>
+                            </div>
+                        </div>     
+                        
+                        <div class="form-group" ng-class="{'has-error':!futureValidityCheck('authorizer_id')}">	
+                            <label for="authorizer_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVM_AUTHORIZER }} *</span></label>  
+                            <div class="col-sm-8 form-control-div label-gap">                  
+                                <p class="form-control-static">{{authorizer.name}}</p>
+                            </div>                      
+                        </div>                                                                       
+                        
+                    </fieldset>
+                    
+				</div> <!--end panel body-->                 
+                
+            </div> <!--end panel -->  
+        
+        </div>  <!--end col 2-->          
+        
+        <div class="col-sm-4">
+        
+            <div class="panel panel-default fieldset-panel">
+            
+            	<div class="panel-body">
+            
+                    <fieldset>
+                        <legend class="scheduler-border">{{ lib.DOCUMENTS_LIBRARY }}</legend>  
+                        
+                        <ul class="list-group">
+                          <li ng-repeat="document in documents" class="list-group-item">   
+                          <span ng-click="openDocument(document.doc_id)" style="color:blue;cursor: pointer;">{{document.filename}}</span>    
+                          </li>               
+                        </ul>                                                                                 
+                        
+                    </fieldset>
+                
+                </div> <!--end panel body-->  
+                
+            </div>  <!--end panel -->           
+            
+<cfif rc.chkRequestAuthorization EQ "Y" OR rc.chkAuthorizePreparation EQ "Y">            
+            
+            <div class="panel panel-default fieldset-panel">
+            
+            	<div class="panel-body">
+                
+                <fieldset>
+               		<legend class="scheduler-border">Comments <span style="font-size:x-small">(HRFP and HoO only)</span></legend> 
+                    
+                    <p ng-show="data.comments.length > 0"><span style="font-style:italic">Previous Comments:</span></p>
+                    <p ng-repeat="comment in data.comments">{{comment.author}} on {{comment.created_on}} said: <br />{{comment.text}}</p> 
+                    <p><span style="font-style:italic">Add Short Comment:</span></p>
+                	<div class="form-group" style="margin-left:5px; margin-right:5px">                   
+                		<textarea class="form-control" rows="5" id="comments" name="comments"></textarea>
+                	</div>        
+                    
+                </fieldset> 
+                                
+				</div>  
+                              
+            </div>	
+</cfif>                       
+        
+        </div>  <!--end col 3-->               
+
+    </div> <!--end row-->              
+    
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container-fluid">
+            <a ui-sref="evaluations.list">
+                <button class="btn btn-default navbar-btn">{{lib.BACK_TO_GRID || 'Back to grid'}}</button>
+            </a>
+
+            <a ui-sref="evaluations.details.preparation({'viewEdit': 'edit'})" ng-if="viewOrEdit=='view'">     
+                <button class="btn btn-primary navbar-btn">{{ lib.EDIT_PREPARATION }}</button>	
+            </a>
+
+
+            <a ui-sref="evaluations.details.preparation({'viewEdit': 'delete'})" ng-if="viewOrEdit=='edit'">
+                <button class="btn btn-warning navbar-btn">{{ lib.DELETE_PREPARATION }}</button>
+            </a>
+
+            <a ui-sref="evaluations.details.preparation({'viewEdit': 'request'})" ng-if="viewOrEdit=='edit'">
+                <button class="btn btn-success navbar-btn">{{ lib.REQUEST_AUTHORIZATION }}</button>
+            </a>
+
+            <a ui-sref="evaluations.details.preparation({'viewEdit': 'accept'})" ng-if="viewOrEdit=='edit'">
+                <button class="btn btn-success navbar-btn">{{ lib.AUTHORIZE_PREPARATION }}</button>
+            </a>
+
+            <a ui-sref="evaluations.details.preparation({'viewEdit': 'reject'})" ng-if="viewOrEdit=='edit'">
+                <button class="btn btn-danger navbar-btn">{{ lib.REJECT_PREPARATION }}</button>
+            </a>
+
+	        <!-- <button class="btn btn-default navbar-btn" ng-click="setPrepCtrl.backToGrid()">{{ setPrepCtrl.lib.BACK_TO_GRID }}</button>
+<cfif rc.chkEditPreparation EQ "Y">            
+            <button class="btn btn-primary navbar-btn" ng-click="setPrepCtrl.toggleViewEdit('edit')">{{ setPrepCtrl.lib.EDIT_PREPARATION }}</button>	
+</cfif>            
+<cfif rc.chkDeleteEvaluation EQ "Y">          
+            <button class="btn btn-warning navbar-btn" ng-click="setPrepCtrl.deletePrep()">{{ setPrepCtrl.lib.DELETE_PREPARATION }}</button>  
+</cfif>     
+<cfif rc.chkRequestAuthorization EQ "Y">            
+	        <button class="btn btn-success navbar-btn" ng-click="setPrepCtrl.requestVal()">{{ setPrepCtrl.lib.REQUEST_AUTHORIZATION }}</button>	
+</cfif>    
+<cfif rc.chkAuthorizePreparation EQ "Y">              
+        <button class="btn btn-success navbar-btn" ng-click="setPrepCtrl.acceptPrep()">{{ setPrepCtrl.lib.AUTHORIZE_PREPARATION }}</button>	          
+        <button class="btn btn-danger navbar-btn" ng-click="setPrepCtrl.rejectPrep()">{{ setPrepCtrl.lib.REJECT_PREPARATION }}</button>             
+</cfif>   -->
+
+            
+            <ul class="nav navbar-nav navbar-right">  	                                                
+                <li><a ng-click="changeLanguage()" class="pointer-cursor">{{ lib.CHANGE_LANGUAGE }}</a></li>        	
+            </ul>   
+                     
+        </div>
+    </nav> 
+
+</form>
+
+<!-- </cfoutput> -->

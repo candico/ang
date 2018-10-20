@@ -1,0 +1,118 @@
+.mb0px
+{
+	margin-bottom:0px;
+}
+
+.mt5px
+{
+	margin-top:5px;
+}
+
+.root-table
+{
+	border-left:1px solid #ddd;
+	border-right:1px solid #ddd;
+	border-bottom:1px solid #ddd	
+}
+
+body
+{
+	overflow-y:scroll;	
+	background-color:#ffc;
+}
+
+.pr0px
+{
+	padding-right:0px;
+}
+
+.pl0px
+{
+	padding-left:0px;
+}
+
+.extra-tab
+{
+	border-left:1px solid #ddd;
+	border-right:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	background-color:#fff;
+}
+
+.p10px
+{
+	padding:10px;
+}
+
+.sep
+{
+	font-size:6px;
+	line-height:6px;
+}
+/*
+*, input , select
+{
+	font-size:12px!important;
+}*/
+
+.table
+{
+	background-color:#fff;
+}
+
+.label
+{
+		font-weight:normal;
+}
+
+/*
+viewPreparation.cfm
+editPreparation.cfm
+*/
+
+label{    
+    padding-right:3;
+}
+
+.col-sm-4{
+	padding:3px;
+}
+
+.col-sm-8{
+	padding:3px;
+}
+
+.col-sm-9{
+	padding:3px;
+}
+
+.col-sm-3{
+	padding:3px;	
+}
+
+.col-sm-1{
+	padding:3px;
+}
+
+.well{
+	border-color:darkgrey;
+	margin-top:6px;
+	margin-bottom:6px;	
+}
+
+.label-gap{
+	padding-left:10px;
+}
+
+.label-warning-alt{
+	color:black;
+	background-color:white;
+	border:1px #f0ad4e solid;
+}
+
+.label-primary-alt{
+	color:black;
+	background-color:white;
+	border:1px #428bca solid;
+}
+

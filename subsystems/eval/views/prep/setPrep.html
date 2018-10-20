@@ -1,0 +1,13 @@
+
+
+<div ng-controller="setPrepController as setPrepCtrl" ng-cloak>
+		<ng-switch on="$stateParams.viewEdit"> 
+				<div ng-switch-when="view"> 
+					<div ng-include="'subsystems/eval/views/prep/viewPrep.html'"></div>   
+				</div>  
+				
+				<div ng-switch-when="edit"> 
+					<div ng-include="'subsystems/eval/views/prep/editPrep.html'"></div>   
+				</div> 
+		</ng-switch>
+</div>

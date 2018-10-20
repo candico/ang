@@ -1,0 +1,308 @@
+<form name="setSassCtrl.viewNSForm" id="viewNSForm" class="form-horizontal" novalidate>
+<input type="hidden" name="evaluation_id" id="evaluation_id" value="{{data.evaluation_id}}" />
+
+<script type="text/ng-template" id="templateSASS">
+    <div class="ngdialog-message" ng-controller="templateSASSCtrl">
+        <h4>
+            <span ng-if="viewOrEdit=='edit'">Edit</span>
+            <span ng-if="viewOrEdit=='view'">View</span>
+            <span ng-if="state.name=='evaluations.details.selfassessment' && dataToPassToDialog.PERIOD_ID==1">Self-Assessment</span>
+            <span ng-if="state.name=='evaluations.details.evaluation' && dataToPassToDialog.PERIOD_ID==1">Supervisor/Evaluator Assessment</span>
+            <span ng-if="dataToPassToDialog.PERIOD_ID==2">Next Year's Objectives</span>
+        </h4>
+
+        <div>
+            <label>Competency</label>:
+            <span ng-if="viewOrEdit=='view'">{{dataToPassToDialog.COMPETENCY}}</span>
+            <span ng-if="viewOrEdit=='edit' && $state.current.name=='evaluations.details.evaluation' && dataToPassToDialog.PERIOD_ID==1">{{dataToPassToDialog.COMPETENCY}}</span>
+            <ng-include ng-if="viewOrEdit=='edit' && $state.current.name=='evaluations.details.evaluation' && dataToPassToDialog.PERIOD_ID==2" src="'templateCompetencies'"></ng-include>
+            <ng-include ng-if="viewOrEdit=='edit' && $state.current.name=='evaluations.details.selfassessment'" src="'templateCompetencies'"></ng-include>
+        </div>
+
+        <!-- <div ng-if="state.name=='evaluations.details.selfassessment'">
+            <label>Level</label>:
+            <span ng-if="viewOrEdit=='view'">{{dataToPassToDialog.EXPECTED_LEVEL}}</span>
+        </div> -->
+
+        <div ng-if="state.name=='evaluations.details.selfassessment' || (state.name=='evaluations.details.evaluation' && dataToPassToDialog.PERIOD_ID==2)">
+            <label>Objective</label>:
+            <ng-include ng-if="viewOrEdit=='edit'" src="'templateObjectives'"></ng-include>
+            <span ng-if="viewOrEdit=='view'">{{dataToPassToDialog.OBJECTIVE}}</span>
+        </div>
+
+        <div ng-if="state.name=='evaluations.details.selfassessment' && dataToPassToDialog.PERIOD_ID==1">
+            <label>Self-Assessment</label>:
+            <span ng-if="viewOrEdit=='view'">{{dataToPassToDialog.SELF_ASSESSMENT}}</span>              
+            <div ng-if="viewOrEdit=='edit'">
+                <textarea ng-model="dataToPassToDialog.SELF_ASSESSMENT" name="SELF_ASSESSMENT" maxlength="2000" required style="margin: 0px; width: 100%; height: 210px;"></textarea>
+            </div>
+        </div>
+        <div ng-if="(state.name=='evaluations.details.selfassessment' || state.name=='evaluations.details.evaluation') && dataToPassToDialog.PERIOD_ID==2">
+            <label>Potential Learning Activity</label>: 
+            <span ng-if="viewOrEdit=='view'">{{dataToPassToDialog.LEARNING_ACTIVITY}}</span>
+            <div ng-if="viewOrEdit=='edit'">
+                <textarea ng-model="dataToPassToDialog.LEARNING_ACTIVITY" name="LEARNING_ACTIVITY" maxlength="2000" required style="margin: 0px; width: 100%; height: 210px;"></textarea>
+            </div>
+        </div>
+        <div ng-if="state.name=='evaluations.details.evaluation' && dataToPassToDialog.PERIOD_ID==1">
+            <label>Self-Assessment</label>:
+            <span>{{dataToPassToDialog.SELF_ASSESSMENT}}</span>
+        </div>
+
+        <div ng-if="state.name=='evaluations.details.evaluation' && dataToPassToDialog.PERIOD_ID==1">
+            <label>Levels of performance</label>:
+            <span ng-if="viewOrEdit=='view'">{{dataToPassToDialog.PERFORMANCE_LEVEL}}</span>
+            <div ng-if="viewOrEdit=='edit'">
+                <ng-include ng-if="viewOrEdit=='edit'" src="'levelExpectedTemplate'"></ng-include>
+            </div>
+        </div> 
+
+        <div ng-if="state.name=='evaluations.details.evaluation' && dataToPassToDialog.PERIOD_ID==1">
+            <label>Supervisor/Evaluator Assessment</label>:
+            <span ng-if="viewOrEdit=='view'">{{dataToPassToDialog.EVALUATOR_ASSESSMENT}}</span>              
+            <div ng-if="viewOrEdit=='edit'">
+                <textarea ng-model="dataToPassToDialog.EVALUATOR_ASSESSMENT" name="EVALUATOR_ASSESSMENT" maxlength="2000" required style="margin: 0px; width: 100%; height: 210px;"></textarea>
+            </div>
+        </div>
+
+    </div>
+    <div class="ngdialog-buttons">
+        <button type="button" ng-if="viewOrEdit=='edit'" class="btn btn-danger float-left pull-left" ng-click="closeThisDialog(2)">Delete</button>
+        <button type="button" ng-if="viewOrEdit=='edit'" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(1)">Save</button>
+        <button type="button" ng-if="viewOrEdit=='view'" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(0)">Close</button>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="levelExpectedTemplate">
+    <!-- <div class="btn-group" data-toggle="buttons"> -->
+        <label class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Below Expectations">
+            <input type="radio" name="PERFORMANCE_LEVEL" ng-model="dataToPassToDialog.PERFORMANCE_LEVEL" value="BE"> BE
+        </label>
+        <label class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Meet Some Expectations">
+            <input type="radio" name="PERFORMANCE_LEVEL" ng-model="dataToPassToDialog.PERFORMANCE_LEVEL" value="MSE"> MSE
+        </label>
+        <label class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Meet Expectations">
+            <input type="radio" name="PERFORMANCE_LEVEL" ng-model="dataToPassToDialog.PERFORMANCE_LEVEL" value="ME"> ME
+        </label>
+        <label class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Exceed Expectations">
+            <input type="radio" name="PERFORMANCE_LEVEL" ng-model="dataToPassToDialog.PERFORMANCE_LEVEL" value="EE"> EE
+        </label>
+    <!-- </div> -->
+</script>
+
+<script type="text/ng-template" id="templateCompetencies">
+    <select name="competency" ng-model="dataToPassToDialog.COMPETENCY_ID" ng-options="ref.COMPETENCY_ID as ref.COMPETENCY for ref in competencies"></select>
+</script>
+
+<script type="text/ng-template" id="templateObjectives">
+    <!-- <style>
+        #objectivesGrid .ui-grid-row { height: auto!important; }
+        #objectivesGrid .ui-grid-row > div { display: table-row; }
+        #objectivesGrid .ui-grid-row > div .ui-grid-cell { display: table-cell; float: none; vertical-align: middle; height: auto!important; }
+        #objectivesGrid .ui-grid-cell-contents { white-space: normal; text-overflow: inherit; word-break: break-word;}
+        #objectivesGrid .ui-grid-invisible { display: none; }
+    </style>
+    <div ui-grid="objectivesGrid" ui-grid-selection ui-grid-cellNav id="objectivesGrid"></div> -->
+    
+    
+    <!-- 
+    <style>
+        select#objectivesGrid { height: 200px;  width: 420px; }
+        select#objectivesGrid option { white-space: normal; border-bottom: thin dotted black; padding: 7px;}
+    </style>
+    <select name="objectives" size="2" class="selectpicker show-tick" id="objectivesGrid" ng-model="dataToPassToDialog.OBJECTIVE_ID" ng-options="ref.OBJECTIVE_ID as ref.OBJECTIVE for ref in objectives"></select>
+     -->
+    <style>
+        div#dialogObjectives {
+            height: 210px;
+            overflow-y: auto;
+        }
+        #dialogObjectives label, #dialogObjectives button {
+            white-space: normal;
+            text-align: left;
+            display: block;
+        }
+    </style>
+    <div id="dialogObjectives">
+        <!-- <div class="btn-group-vertical" role="group">
+            <button type="button" name="OBJECTIVE_ID" class="btn btn-default" ng-value="ref.OBJECTIVE_ID" ng-model="dataToPassToDialog.OBJECTIVE_ID" ng-repeat="ref in objectives" >{{ref.OBJECTIVE}}</button>
+        </div> -->
+        <label ng-repeat="ref in objectives" class="btn btn-default">
+            <input type="radio" name="OBJECTIVE_ID" ng-model="dataToPassToDialog.OBJECTIVE_ID" ng-value="ref.OBJECTIVE_ID"> {{ref.OBJECTIVE}} </input>
+        </label>
+    </div>
+</script>
+
+
+<!-- <div class="row">
+     <div class="col-sm-4">
+        <div class="panel panel-default fieldset-panel">
+            <div class="panel-body">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="label label-primary-alt">Evaluee</span></label>
+                        <div class="col-sm-9 form-control-div label-gap"> 
+                            <p class="form-control-static">{{data.full_name || 'N/A'}} </p>
+                        </div>  
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="label label-primary-alt">Current Function</span></label>  
+                        <div class="col-sm-9 form-control-div label-gap"> 
+                             <p class="form-control-static">{{data.current_role || 'N/A'}} </p>
+                        </div>  
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    
+     <div class="col-sm-4">
+        <div class="panel panel-default fieldset-panel">
+            <div class="panel-body">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="label label-primary-alt">Duty Station</span></label>  
+                        <div class="col-sm-9 form-control-div label-gap"> 
+                             <p class="form-control-static">{{data.home_office || 'N/A'}} </p>
+                        </div>  
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="label label-primary-alt">With ECHO since:</span></label>  
+                        <div class="col-sm-9 form-control-div label-gap"> 
+                             <p class="form-control-static">{{data.first_echo_contract_start || 'N/A'}} </p>
+                        </div>  
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-sm-4">
+        <div class="panel panel-default fieldset-panel">
+            <div class="panel-body">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="label label-primary-alt">Duty Station</span></label>  
+                        <div class="col-sm-9 form-control-div label-gap"> 
+                             <p class="form-control-static">{{data.home_office || 'N/A'}} </p>
+                        </div>  
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="label label-primary-alt">With ECHO since:</span></label>  
+                        <div class="col-sm-9 form-control-div label-gap"> 
+                             <p class="form-control-static">{{data.first_echo_contract_start || 'N/A'}} </p>
+                        </div>  
+                    </div>
+                </fieldset>
+            </div>
+        </div>        
+    </div>
+</div> -->
+
+<div class="row">
+
+     <div class="col-sm-12">         	
+    
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row vertical-align">
+                    <div class="col-sm-6">
+                        <label ng-if="state.name=='evaluations.details.selfassessment'">Evaluee Self-Assessment</label>
+                        <label ng-if="state.name=='evaluations.details.evaluation'">Supervisor/Evaluator Assessment</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <ng-include ng-controller="sassDatePickerCtrl" ng-if="state.name=='evaluations.details.evaluation'" 
+                        src="'datePicker'" ng-init="nameDP='evaluation_dialog_date'; label='Date of Dialog:';"></ng-include>
+                    </div>
+                    <div class="col-sm-2">
+                        <button ng-click="addNewRow(1)" ng-if="state.name=='evaluations.details.selfassessment' && viewOrEdit=='edit'" style="width: 80px;">Add new</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body" style="padding: 0;">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th width="15%">Competency</th>
+                            <th width="30%" ng-if="state.name=='evaluations.details.selfassessment'">Objective</th>
+                            <th width="30%">Self-assessment</th>
+                            <th width="30%" ng-if="state.name=='evaluations.details.evaluation'">Supervisor/Evaluator Assessment</th>
+                            <th width="10%" ng-if="state.name=='evaluations.details.evaluation'">Levels of performance</th>
+                            <th width="5%">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>  
+                        <tr ng-repeat="objective in sass track by $index">
+                            <td>{{objective.COMPETENCY}}</td>
+                            <td ng-if="state.name=='evaluations.details.selfassessment'">{{objective.OBJECTIVE}}</td>
+                            <td>{{objective.SELF_ASSESSMENT}}</td>
+                            <td ng-if="state.name=='evaluations.details.evaluation'">{{objective.EVALUATOR_ASSESSMENT}}</td>
+                            <td ng-if="state.name=='evaluations.details.evaluation'">{{objective.PERFORMANCE_LEVEL}}</td>
+                            <td>
+                                <button ng-click="openDialog('sass', $index)">
+                                   <span ng-if="viewOrEdit=='edit'">edit</span>
+                                   <span ng-if="viewOrEdit=='view'">view</span>
+                                </button>
+                            </td>
+                        </tr>  
+                        </tbody>
+                    </table>
+                </div>
+            </div>  
+                         
+        </div>  <!--end panel-->             
+        
+    </div>   <!--end col-->        
+
+</div> <!--end row 3--> 
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row vertical-align">
+                    <div class="col-sm-11">
+                        <label>Identification of Next Year's Objectives</label>
+                    </div>
+                    <div class="col-sm-1">
+                        <button ng-click="addNewRow(2)" ng-if="viewOrEdit=='edit'" style="width: 80px;">Add new</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body" style="padding: 0;">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th width="15%">Competency</th>
+                            <th width="30%">Objective</th>
+                            <th width="30%">Potential Learning Activity</th>
+                            <th width="5%">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>  
+                        <tr ng-repeat="nextYearObjective in nextYearObjectives track by $index" class="clickable-row">
+                            <td>{{nextYearObjective.COMPETENCY}}</td>
+                            <td>{{nextYearObjective.OBJECTIVE}}</td>
+                            <td>{{nextYearObjective.LEARNING_ACTIVITY}}</td>
+                            <td>
+                                <button ng-click="openDialog('nextYearObjectives', $index)">
+                                    <span ng-if="viewOrEdit=='edit'">edit</span>
+                                    <span ng-if="viewOrEdit=='view'">view</span>
+                                </button>
+                            </td>
+                        </tr>  
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-include ng-init="editButton=navBarEditButton;" src="'navbarBottomTemplate'"></ng-include>
+
+</form>
+

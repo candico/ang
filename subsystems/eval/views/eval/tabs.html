@@ -1,0 +1,211 @@
+<uib-tabset active="activeTabIndex" ng-if="$stateParams.viewEdit!='new'">
+    <uib-tab index="'evaluations.details.preparation'" ui-sref="evaluations.details.preparation" ui-sref-active="active" heading="Preparation" ng-if="evalPrepPriv.visible" >
+        <div class="row">
+            <div class="col-md-12" ng-include="'subsystems/eval/views/preparation/preparation.html'"></div>
+        </div>
+    </uib-tab>
+    <uib-tab index="'evaluations.details.selfassessment'" ui-sref="evaluations.details.selfassessment" ui-sref-active="active" heading="Self-Assessment" ng-if="evalSassPriv.visible">
+        <div class="row">
+            <div class="col-md-9" ng-include="'subsystems/eval/views/sass/viewNS.html'"></div>
+            <div class="col-md-3" ng-include="'evalueeLegend'"></div>
+        </div>           
+    </uib-tab>
+    <uib-tab index="'evaluations.details.feedback'" ui-sref="evaluations.details.feedback" ui-sref-active="active" heading="Feedback Form" ng-if="evalFeedbackPriv.visible">
+        <div class="row">
+            <div class="col-md-9" ng-include="'subsystems/eval/views/feedback/feedback.html'"></div>
+            <div class="col-md-3" ng-include="'evalueeLegend'"></div>
+        </div>
+    </uib-tab>
+    <uib-tab index="'evaluations.details.evaluation'" ui-sref="evaluations.details.evaluation" ui-sref-active="active" heading="Evaluator assessment" ng-if="evalEassPriv.visible">
+        <div class="row">
+            <div class="col-md-9" ng-include="'subsystems/eval/views/sass/viewNS.html'"></div>
+            <div class="col-md-3" ng-include="'evalueeLegend'"></div>
+        </div>
+    </uib-tab>
+    <uib-tab index="'evaluations.details.closure'" ui-sref="evaluations.details.closure" ui-sref-active="active" heading="Closure" ng-if="evalClosurePriv.visible">
+        <div class="row">
+            <div class="col-md-9" ng-include="'subsystems/eval/views/closure/closure.html'"></div>
+            <div class="col-md-3" ng-include="'evalueeLegend'"></div>
+        </div>
+    </uib-tab>
+    <uib-tab index="'evaluations.details.followup'" ui-sref="evaluations.details.followup" ui-sref-active="active" heading="Follow-up" ng-if="evalFollowUpPriv.visible">
+        <div class="row">
+            <div class="col-md-9" ng-include="'subsystems/eval/views/followup/followup.html'"></div>
+            <div class="col-md-3" ng-include="'evalueeLegend'"></div>
+        </div>
+    </uib-tab>    
+
+
+    <button class="btn btn-default pull-right" title="Generate PDF" ng-click="evalPdf()" style="padding:2px;width:4%;"><i class="fa fa-file-pdf-o fa-2x"></i></button>
+</uib-tabset>
+
+<div class="row" ng-if="$stateParams.viewEdit=='new' && newEvaluationScreenAllowed>=0">
+    <div class="col-md-12" ng-include="'subsystems/eval/views/preparation/preparation.html'"></div>
+</div>
+
+<script type="text/ng-template" id="evalueeLegend">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <label class="col-sm-6">Evaluee:</label>
+                
+                <div class="col-sm-6">{{summary.evaluee.name || 'N/A'}}</div>
+            </div>
+            <!-- <p><b>Current Function:</b> {{evalueeDetails.current_role || 'N/A'}}</p> -->
+        </div>
+        <div class="panel-body">
+           <!--  <p><b>Duty Station:</b> {{evalueeDetails.home_office || 'N/A'}}</p>
+            <p><b>With ECHO since:</b> {{evalueeDetails.first_echo_contract_start || 'N/A'}}</p> -->
+           
+            
+            <div class="row">
+                <label class="col-sm-6">Evaluator:</label>
+                <div class="col-sm-6">{{summary.supervisor.name || 'N/A'}}</div>
+            </div>
+
+           <div class="row" style="background-color: whitesmoke;">
+                <label class="col-sm-6">Contributors:</label>
+                <div class="col-sm-6">
+                    <div ng-repeat="item in summary.contributors track by $index">{{item.name || 'N/A'}}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-sm-6">D4:</label>
+                <div class="col-sm-6">
+                    <div ng-repeat="item in summary.preparators track by $index">{{item.name || 'N/A'}}</div>
+                </div>
+            </div>
+
+            <div class="row" style="background-color: whitesmoke;">
+                <label class="col-sm-6">Head of Functional Unit:</label>
+                <div class="col-sm-6">{{summary.head.name || 'N/A'}}</div>
+            </div>
+
+            <hr>
+
+            <ng-include src="'documentListTemplate'"></ng-include>
+            
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="datePicker">
+    <div class="col-sm-12" >
+        <label class="col-sm-7 control-label">{{label}}</label>
+        <p class="input-group col-sm-5">
+            <input type="text" class="form-control" style="padding: 2px" readonly name="{{nameDP}}"
+            uib-datepicker-popup="{{dateOptions.format}}" 
+            ng-model="dt[nameDP]"
+            is-open="dateOptions.openCloseStatus"
+            datepicker-options="dateOptions"
+            ng-required="true" 
+            close-text="Close">
+            <span class="input-group-btn" ng-if="viewOrEdit=='edit'">
+                <button type="button" class="btn btn-default" ng-click="openCloseDP(nameDP)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </p>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="datePickerRange">
+<div class="col-sm-6">
+    <label class="col-sm-4 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_FROM || From }}</label>
+        <p class="input-group col-sm-8">
+        <input type="text"  style="padding: 4px; cursor: default;" readonly name="{{dpFromName}}"
+        class="form-control"
+        uib-datepicker-popup="{{dateOptions.format}}"
+        ng-model="dt[dpFromName]"
+        is-open="dateOptions.openCloseStatus[dpFromName]"
+        datepicker-options="dateOptions"
+        ng-required="true"
+        close-text="Close"
+        alt-input-formats="altInputFormats" />
+        <span class="input-group-btn" ng-if="viewOrEdit=='edit' || viewOrEdit=='new'">
+            <button type="button" class="btn btn-default" ng-click="openClose(dpFromName)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+        </p>
+    </div>
+
+    <div class="col-sm-6">
+    <label class="col-sm-4 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_UNTIL || Until }}</label>
+    <p class="input-group col-sm-8">
+        <input type="text"  style="padding: 4px; cursor: default;" readonly name="{{dpToName}}"
+        class="form-control"
+        uib-datepicker-popup="{{dateOptions.format}}"
+        ng-model="dt[dpToName]"
+        is-open="dateOptions.openCloseStatus[dpToName]"
+        datepicker-options="dateToOptions"
+        ng-required="true"
+        close-text="Close"
+        alt-input-formats="altInputFormats" />
+        <span class="input-group-btn" ng-if="viewOrEdit=='edit' || viewOrEdit=='new'">
+        <button type="button" class="btn btn-default" ng-click="openClose(dpToName)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+    </p>
+</div>
+</script>
+
+<script type="text/ng-template" id="documentListTemplate">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <label>Documents Library</label>
+        <button ng-if="viewOrEdit=='edit' || viewOrEdit=='new'" ngf-select="uploadDocument($file)" class="float-right pull-right"><i class="fa fa-plus"></i></button>
+    </div>
+    <div class="panel-body">
+        <fieldset ng-disabled="viewOrEdit=='view'">
+            <style>.dragover { border: dashed blue; }</style>
+            <div ngf-drop="uploadDocument($file)" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="false" ngf-pattern="'*/*,application/pdf'">    
+                <ul class="list-group">
+                    <li ng-repeat="document in documents" class="list-group-item">   
+                        <span ng-click="openDocument(document.DOC_ID)" style="color:blue; cursor:pointer;">{{document.FILENAME}}</span>
+                        <span ng-if="(viewOrEdit=='edit' || viewOrEdit=='new') && document.edit==true" class="float-right pull-right"><button ng-click="deleteDocument(document.DOC_ID)"><i class="fa fa-minus"></i></button></span>
+                    </li>               
+                </ul>
+            </div>
+            <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>                                                                               
+        </fieldset>
+    </div>
+</div>
+</script>
+
+
+<script type="text/ng-template" id="navbarBottomTemplate">
+<div class="row"><div class="col-md-12"><hr></div></div>
+<style>
+@supports (-ms-ime-align:auto) { /* CSS that detect Microsot EDGE browser */
+    .footer-links {
+        padding: 3em 1em 1em 1em;
+    }
+    .footer-links a {
+        display: inline-block;
+        transition: transform .75s;
+    }
+    .footer-links:hover a {
+        transform: translateY(-2em);
+    }
+}
+</style>
+<div class="footer-links">
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container-fluid">
+            <a ui-sref="evaluations.list">
+                <button class="btn btn-default navbar-btn">{{lib.BACK_TO_GRID || 'Back to List'}}</button>
+            </a>
+            <a ui-sref="{{$state.current.name}}({viewEdit: 'view'})" ng-if="$stateParams.viewEdit=='edit'">
+                <button class="btn btn-primary navbar-btn">{{lib.VIEW_MODE || 'View Mode'}}</button>
+            </a>
+            <a ng-if="editButton==true && ($stateParams.viewEdit=='edit' || $stateParams.viewEdit=='new')">
+                <button class="btn btn-success navbar-btn"  ng-click="saveForm();">{{ lib.SAVE || 'Save'}}</button>
+            </a>
+            <a ui-sref="{{$state.current.name}}({viewEdit: 'edit'})" ng-if="editButton==true && $stateParams.viewEdit=='view'">
+                <button class="btn btn-primary navbar-btn">{{lib.EDIT || 'Edit Mode'}}</button>
+            </a>
+            <ul class="nav navbar-nav navbar-right">  	                                                
+                <li><a ng-click="changeLanguage()" class="pointer-cursor">{{ lib.CHANGE_LANGUAGE || 'Change language'}}</a></li>        	
+            </ul>   
+        </div>
+    </nav>
+</div>
+</script>

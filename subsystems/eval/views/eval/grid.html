@@ -1,0 +1,52 @@
+<style>
+    .evalTableClass thead th {
+        text-align: left;
+    }
+
+    .evalTableClass tbody tr:hover td {
+        cursor: pointer;
+        background-color: aliceblue;
+    }
+
+    li.disabled > a {
+        pointer-events: none;
+    }
+</style>
+
+<table ng-table="evalTableParams" class="table table-striped evalTableClass" show-filter="false">
+    <tr ng-repeat="data in $data track by $index" ng-click="viewEval(data.ID)">
+        <td title="'Evaluee'" width="20%" filter="{ NAME: 'text' }" sortable="'NAME'">{{data.NAME}}</td>
+        <td title="'Office'" width="20%" filter="{ OFFICE: 'text' }" sortable="'OFFICE'">{{data.OFFICE}}</td>
+        <td title="'Type'" width="20%" filter="{ TYPE: 'text'}" sortable="'TYPE'">{{data.TYPE}}</td>
+        <td title="'Start'" width="20%" filter="{ START_ON: 'text'}" sortable="'START_ON'">
+            <span>{{data.START_ON | date:'yyyy-MM-dd'}}</span>
+        </td>
+        <td title="'End'" width="25%" filter="{ END_ON: 'text'}" sortable="'END_ON'">
+            {{data.END_ON | date:'yyyy-MM-dd'}}
+        </td>
+    </tr>
+</table>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+
+        <div class="btn-group navbar-btn" uib-dropdown ng-if="newEvaluationButtonAllowed>=0">
+            <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                New Evaluation
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li ng-repeat="item in evalTypes" role="menuitem" ng-class="{disabled: item.STATUS_ID == 0}">
+                    <a ui-sref="evaluations.details.preparation({evalId: item.TYPE_ID, viewEdit: 'new'})">{{item.TYPE}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a ng-click="evalGridCtrl.changeLanguage()" class="pointer-cursor">Change Language</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>

@@ -1,0 +1,378 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+	 padding-top:145px;	/* for the fixed menu */
+ }
+ 
+#banner-site-name {
+	display: flex;
+	justify-content: space-between;
+}
+ 
+/* .gridContainer{
+	padding-top: 40px; 
+ } */
+	
+	
+.pointer-cursor{
+	cursor:pointer;
+}
+
+.file-link{
+	cursor:pointer;
+}
+
+.alt-file-link{
+	cursor:pointer;
+}
+
+.ui-grid-cell-contents {
+  cursor: pointer;
+}	
+ 
+/* top menu */
+
+.fixed-top-menu { /* pushes the fixed menu below the banner */
+	 margin-top: 145px;	 
+ }
+ 
+.top-menu-content{
+	margin-top:60px;	
+}
+
+.info-panel{
+	min-height:200px;
+}
+ 
+ /*from views/nsm/edit.cfm*/
+ 
+.col-sm-8, col-sm-2 {
+	min-height: 30px;	
+	vertical-align: middle;
+}
+
+.section-header {
+	padding-top: 10px;					
+}
+
+.menu-item {
+	cursor: pointer;	
+}
+
+.label {		
+	font-size:14px;
+	font-weight: normal
+}  
+
+.primary{	
+	color: #0d66b3;
+}
+
+.primary-border {	
+	border-color: #0d66b3;
+}
+
+.warning {
+	color: #f0ad4e;	
+}
+
+.warning-border {
+	border-color: #f0ad4e;	
+}
+
+.primary label {
+	color: #0d66b3;			
+}
+
+.primary input {
+	border-color: #0d66b3;			
+}
+
+.pointer-cursor{
+	cursor:pointer;
+}
+
+.control-label {
+	padding-right:3px;
+}
+
+.form-control-div {
+	padding-left:3px;
+}
+
+.no-border {
+	border: 0;
+	box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
+}	
+
+.ui-grid-cell-contents {
+  cursor: pointer;
+}
+
+.panel.panel-default.fieldset-panel{
+	/*background-color:#f5f5f5;*/	
+	border-color:darkgrey;	
+}
+
+.label.label-warning-alt{
+	color:black;
+	background-color:white;
+	border:1px #f0ad4e solid;
+}
+
+.label.label-primary-alt{
+	color:black;
+	background-color:white;
+	border:1px #428bca solid;
+}
+
+.label-div{	
+	text-align:right;	
+	padding:6px;	
+}
+
+.item-div{			
+	padding:6px;	
+}
+
+.alt-data{
+	font-style:italic;	
+	color:#0065a2;
+}
+
+.alt-hint{
+	text-decoration:underline;	
+	text-decoration-color:blue;
+}
+
+.alt-label{
+	color:blue;
+}
+
+.help-block.alt-data{
+	font-style:italic;	
+	color:blue;
+}
+
+.edit-panel .label-primary{
+	color:black;
+	background-color:white;
+	border:1px #428bca solid;
+}
+
+.edit-panel .label-warning{
+	color:black;
+	background-color:white;
+	border:1px #f0ad4e solid;
+}
+
+.view-panel .label-primary{
+	color:black;
+	background-color:white;
+	border:1px #428bca solid;
+}
+
+.view-panel .label-warning{
+	color:black;
+	background-color:white;
+	border:1px #f0ad4e solid;
+}
+
+.form-control-div{
+	padding-left:6px;	
+}
+
+.control-label{
+	padding-right:6px;	
+}
+
+input.ng-invalid, select.ng-invalid, input.ng-invalid-required, select.ng-invalid-required{
+	border-left: 5px solid #E03930;	
+}
+
+input.ng-valid, select.ng-valid, input.ng-valid-required, select.ng-valid-required{
+	border-left: 5px solid #57A83F;	
+}
+
+textarea.ng-invalid, textarea.ng-invalid-required{
+	border-left: 5px solid #E03930;	
+}
+
+textarea.ng-valid, textarea.ng-valid-required{
+	border-left: 5px solid #57A83F;	
+}
+
+.frc {
+	border-left: 5px solid #57A83F;	
+}
+
+.errors{
+	color: #E03930;	
+}
+
+.nav>li.lang-menu-item>a{
+	padding-left:3px;
+	padding-right:3px;		
+}
+
+.extra-tab
+{
+	border-left:1px solid #ddd;
+	border-right:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	background-color:#fff;
+}
+
+.panel-default.new-item{
+	border:1px solid green;
+}
+
+.updated-item{
+	border:1px solid #0065a2 !important;
+}
+
+h4[data-toggle] {
+    cursor:pointer;
+}
+
+/* prevents empty div from collapsing */
+span:empty:before {content: '\a0';}
+
+.current-data{
+	border-bottom: darkgrey 1px solid;	
+}
+
+.collapse-link{
+	cursor:pointer;
+}
+
+.sub-panel-container{
+	padding-left:10px;
+	padding-right:10px;		
+	margin-top:15px;
+}
+
+.angucomplete-input-not-empty.ng-empty.required{
+	border-left: 5px solid yellow;	/*red*/
+}
+
+.angucomplete-input-not-empty.ng-empty{
+	border-left: 5px solid #57A83F;	/*green*/
+}
+
+.angucomplete-input-not-empty.ng-not-empty{
+	border-left: 5px solid #57A83F;	/*green*/
+}
+
+.panel-default>.panel-heading.nsm-details{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+.panel-body.nsm-details{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+.label-div.nsm-details{
+	font-weight:bold;	
+}
+
+.item-div.nsm-details{
+	color:blue;
+}
+
+	.changed{
+		color:blue;	
+	}
+	
+	.panel-default>.panel-heading.new{	
+		border-left: 5px solid green;
+	}
+	
+	.panel-default>.panel-heading.added{	
+		border-left: 5px solid green;
+	}	
+	
+	.panel-default>.panel-heading.updated{	
+		border-left: 5px solid blue;
+	}
+	
+	.panel-default>.panel-heading.deleted{	
+		border-left: 5px solid black;
+	}	
+	
+	.starred:after {    
+		font-family: "Glyphicons Halflings";
+		content: "\e007";
+		/*float: right;*/
+		margin-left: 5px; 
+	}	
+	
+	/* Icon when the collapsible content is shown */
+	.collapse-link:after {
+	font-family: "Glyphicons Halflings";
+	/* content: "\e114"; */ /* down */
+	content: "\e113"; /* up */
+	float: right;
+	margin-left: 15px;
+	}
+	
+	/* Icon when the collapsible content is hidden */
+	.collapse-link.collapsed:after {
+	/* content: "\e080"; */ /* right */
+	content: "\e114";  /* down */
+	}
+	
+	.full button span {
+		background-color: limegreen;
+		border-radius: 32px;
+		color: black;
+	}
+	
+	.partially button span {
+		background-color: orange;
+		border-radius: 32px;
+		color: black;
+	}  
+
+h4.panel-title {
+	font-size:21px;
+} 	
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.date-input:{
+	width:50%;
+}
+
+td, div.panel-body, div.ngdialog  {
+	word-break: break-all; /* break long text inside table cell */
+}
+
+.ngdialog.ngdialog-theme-default.custom-width-90percent .ngdialog-content {
+    width: 90%;
+}

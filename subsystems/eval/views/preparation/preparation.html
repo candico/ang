@@ -1,0 +1,232 @@
+<form class="form-horizontal">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <fieldset ng-disabled="viewOrEdit=='view'">
+                        <div class="form-group" style="margin:0">
+                            <div class="row">
+                                <label class="control-label col-sm-1" for="office_id">{{evalType.TYPE}}</label>
+                                <label class="control-label col-sm-1" for="office_id">for office:</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="office" id="office_id" ng-options="ref.OFFICE_ID as ref.CITY for ref in offices" ng-model="formData.offices"
+                                        ng-change="getUsersByRole()">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="panel-body" ng-if="evalType.STATUS_ID==1">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <label>Participants</label>
+                                </div>
+                                <div class="panel-body">
+                                    <fieldset ng-disabled="viewOrEdit=='view'">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" for="evaluee_id">Evaluated:</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" name="evaluee" id="evaluee_id" ng-options="ref.user_id as ref.name for ref in participants.evaluees"
+                                                    ng-model="formData.evaluees"></select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" for="evaluator_id">Evaluator:</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" name="evaluator" id="evaluator_id" 
+                                                ng-options="ref.user_id as ref.name for ref in participants.supervisors"
+                                                ng-model="formData.supervisors"></select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div ng-repeat="(key, val) in formData.contributors track by $index">
+                                                <ng-include ng-init="name='contributors'; label='Contributor'; id=key; radioSelection=true;" src="'selectParticipantArr'"></ng-include>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="form-group">
+                                            <div ng-repeat="(key, val) in formData.contributors track by $index">
+                                                <ng-include ng-init="name='contributors'; label='Contributor'; id=key; radioSelection=true;" src="'selectParticipant'"></ng-include>
+                                            </div>
+                                        </div> -->
+
+                                        <div class="form-group">
+                                            <div ng-repeat="(key, val) in formData.preparators track by $index">
+                                                <ng-include ng-init="name='preparators'; label='D4'; id=key;" src="'selectParticipantArr'"></ng-include>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="form-group">
+                                            <div ng-repeat="(key, val) in formData.preparators track by $index">
+                                                <ng-include ng-init="name='preparators'; label='D4'; id=key;" src="'selectParticipant'"></ng-include>
+                                            </div>
+                                        </div> -->
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" for="head_id">Head of Functional Unit:</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" name="head" id="head_id" ng-options="ref.user_id as ref.name for ref in participants.heads"
+                                                    ng-model="formData.heads"></select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <label>Timetable</label>
+                                </div>
+                                <div class="panel-body">
+
+
+                                    <fieldset ng-disabled="viewOrEdit=='view'">
+                                        <legend class="scheduler-border">Evaluation Period</legend>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" for="preparator_id">&nbsp;</label>
+                                            <div class="col-sm-9" style="padding:0">
+                                                <ng-include ng-init="dpFromName='evaluation_period_start'; dpToName='evaluation_period_end'" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset ng-disabled="viewOrEdit=='view'">
+                                        <legend class="scheduler-border">Evaluation Phases Periods</legend>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" for="preparator_id">Preparation</label>
+                                            <div class="col-sm-9" style="padding:0">
+                                                <ng-include ng-init="dpFromName='preparation_start'; dpToName='preparation_end'" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" for="preparator_id">Self-assessment</label>
+                                            <div class="col-sm-9" style="padding:0">
+                                                <ng-include ng-init="dpFromName='sass_start'; dpToName='sass_end'" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" for="preparator_id">Feedback</label>
+                                            <div class="col-sm-9" style="padding:0">
+                                                <ng-include ng-init="dpFromName='feedback_start'; dpToName='feedback_end'" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" for="preparator_id">Evaluation</label>
+                                            <div class="col-sm-9" style="padding:0">
+                                                <ng-include ng-init="dpFromName='evaluation_start'; dpToName='evaluation_end'" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" for="preparator_id">Closure</label>
+                                            <div class="col-sm-9" style="padding:0">
+                                                <ng-include ng-init="dpFromName='closure_start'; dpToName='closure_end'" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" for="preparator_id">Follow-up</label>
+                                            <div class="col-sm-9" style="padding:0">
+                                                <ng-include ng-init="dpFromName='followup_start'; dpToName='followup_end'" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset ng-disabled="viewOrEdit=='view'">
+                                        <legend class="scheduler-border">&nbsp;</legend>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3" for="preparator_id">Probation Period</label>
+                                            <div class="col-sm-9" style="padding:0">
+                                                <ng-include ng-init="dpFromName='probation_start'; dpToName='probation_end'" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <ng-include src="'documentListTemplate'"></ng-include>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<ng-include ng-init="editButton=navBarEditButton;" src="'navbarBottomTemplate'"></ng-include>
+
+<style>
+.tooltip-inner {
+    min-width: 100px;
+}
+</style>
+
+<!-- <script type="text/ng-template" id="selectParticipant">
+<div id="div_{{name}}_{{id}}">
+    <label class="control-label col-sm-3" for="{{name}}_{{id}}">
+        <span ng-if="id==0">{{label}}:</span>
+        <button ng-if="id==0 && viewOrEdit!='view'" ng-click="addParticipant(name)" class="btn btn-primary btn-xs">
+            <i class="fa fa-plus"></i>
+        </button>
+        <button ng-if="id!=0 && viewOrEdit!='view'" ng-click="removeParticipant(name, id)" class="btn btn-primary btn-xs">
+            <i class="fa fa-minus"></i>
+        </button>
+    </label>
+    <div class="col-sm-9">
+        <span class="col-sm-1 vertical-align" style="padding:0; height:34px;" ng-if="radioSelection">
+            <input type="radio" style="margin:0;" name="{{name}}_selected" id="{{name}}_selected_{{id}}" ng-value="formData[name][id]" 
+            ng-model="formData[name+'_selected']" data-toggle="tooltip" data-placement="top" title="by evaluee">
+        </span>
+        <span ng-class="{'col-sm-11': radioSelection}" style="padding:0;">
+            <select class="form-control" name="{{name}}" id="{{name}}_{{id}}"
+            ng-options="ref.user_id as ref.name for ref in participants[name]"
+            ng-model="formData[name][id]"></select>
+        </span>
+    </div>
+</div>
+</script> -->
+
+
+<!-- && id==(formData[name].length-1) -->
+<script type="text/ng-template" id="selectParticipantArr">
+    <div id="div_{{name}}_{{id}}">
+            <label class="control-label col-sm-3" for="{{name}}_{{id}}">
+                <span ng-if="id==0">{{label}}:</span>
+                <button ng-if="id==0 && viewOrEdit!='view'" ng-click="addParticipant(name)" class="btn btn-primary btn-xs">
+                    <i class="fa fa-plus"></i>
+                </button>
+                <button ng-if="id!=0 && viewOrEdit!='view'" ng-click="removeParticipant(name, id)" class="btn btn-primary btn-xs">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </label>
+            <div class="col-sm-9">
+                <span class="col-sm-1 vertical-align" style="padding:0; height:34px;" ng-if="radioSelection">
+                    <input type="radio" style="margin:0;" name="{{name}}_selected" id="{{name}}_selected_{{id}}" ng-value="formData[name][id]" 
+                    ng-model="formData[name+'_selected']" data-toggle="tooltip" data-placement="top" title="by evaluee">
+                </span>
+                <span ng-class="{'col-sm-11': radioSelection}" style="padding:0;">
+                    <select class="form-control" name="{{name}}" id="{{name}}_{{id}}"
+                    ng-options="ref.user_id as ref.name for ref in participants[name]"
+                    ng-model="formData[name][id]"></select>
+                </span>
+            </div>
+        </div>
+    </script>

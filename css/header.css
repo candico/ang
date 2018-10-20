@@ -1,0 +1,566 @@
+
+@media screen {
+.layout {
+    background-color: #fff;
+    border-color: #369;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    font-size: 120%;
+    margin: 0 auto;
+}
+#header {
+    background-color: #fff;
+    line-height: 1.4;
+    min-height: 75px;
+    position: relative;
+    z-index: 10;
+}
+#banner-flag {
+    color: #000;
+    height: 119px;
+    left: 40px;
+    position: absolute;
+    top: 15px;
+    width: 172px;
+    z-index: 8;
+}
+#header #banner-title-text {
+    border-width: 0;
+    color: #000;
+    font-size: 24px;
+    line-height: 1.2;
+    margin: 0;
+    padding-left: 240px;
+    position: absolute;
+    top: 65px;
+}
+#header #banner-title-text SPAN {
+    display: block;
+    font-size: 18px;
+}
+#banner-image-right {
+    height: 107px;
+    position: absolute;
+    right: 0;
+    top: 38px;
+    width: 210px;
+    z-index: 7;
+}
+#banner-image-title {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    height: 145px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 6;
+}
+#services {
+    font-size: 90%;
+    font-weight: normal;
+    left: 0;
+    padding: 1px 5px 1px 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 2px;
+    z-index: 18;
+}
+#services LI {
+    display: inline;
+    padding: 3px 0;
+}
+#services A {
+    background: url("https://webgate.ec.europa.eu/ECHO/hope/header/images/services-separator.gif") no-repeat scroll left center rgba(0, 0, 0, 0);
+    border-width: 0;
+    color: #396ea2;
+    display: inline-block;
+    font-weight: normal;
+    margin: 0;
+    padding: 0 0 3px 5px;
+    text-decoration: none;
+}
+#services A:visited {
+    background: url("https://webgate.ec.europa.eu/ECHO/hope/header/images/services-separator.gif") no-repeat scroll left center rgba(0, 0, 0, 0);
+    border-width: 0;
+    color: #396ea2;
+    display: inline-block;
+    font-weight: normal;
+    margin: 0;
+    padding: 0 0 3px 5px;
+    text-decoration: none;
+}
+#services A:focus {
+    border-width: 0;
+    color: #396ea2;
+    text-decoration: underline;
+}
+#services A:hover {
+    border-width: 0;
+    color: #396ea2;
+    text-decoration: underline;
+}
+#services A:active {
+    border-width: 0;
+    color: #396ea2;
+    text-decoration: underline;
+}
+#services A.first {
+    background-image: none;
+    border-width: 0;
+}
+.js #services {
+    padding-right: 140px;
+}
+.font-size-2 #services {
+    padding-right: 150px;
+}
+.font-size-3 #services {
+    padding-right: 172px;
+}
+.language-selector {
+    background-color: #fff;
+    font-size: 90%;
+    padding: 1px;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    z-index: 10;
+}
+.language-selector A {
+    margin: 0;
+    padding: 1px 2px;
+}
+.language-selector LI {
+    display: inline;
+    float: left;
+    margin: 0 1px;
+}
+.language-selector LI.selected {
+    background-color: #074a8b;
+    color: #fff;
+    display: inline-block;
+    margin: 0;
+    padding: 0 2px;
+    text-align: center;
+    text-decoration: none;
+}
+.language-selector LI.non-official A {
+    background-color: #def;
+}
+.js .language-selector {
+    display: none;
+}
+.language-selector-close {
+    background-color: #fff;
+    border-color: #9ab;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 90%;
+    overflow: hidden;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 130px;
+    z-index: 99;
+}
+.language-selector-open {
+    background-color: #fff;
+    border-color: #9ab;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 90%;
+    overflow: hidden;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 130px;
+    z-index: 99;
+}
+.language-selector-close LI {
+    left: -999px;
+    padding: 1px;
+    position: absolute;
+    top: -999px;
+}
+.language-selector-open LI {
+    left: 0;
+    padding: 1px;
+    position: relative;
+    top: 0;
+    width: 128px;
+}
+.language-selector-close LI.selected {
+    left: 0;
+    padding: 1px;
+    position: relative;
+    top: 0;
+    width: 128px;
+}
+.language-selector-close A {
+    border-width: 0;
+    color: #396ea2;
+    display: block;
+    padding: 0 3px;
+    text-decoration: none;
+}
+.language-selector-open A {
+    border-width: 0;
+    color: #396ea2;
+    display: block;
+    padding: 0 3px;
+    text-decoration: none;
+}
+.language-selector-close A:visited {
+    border-width: 0;
+    color: #396ea2;
+    display: block;
+    padding: 0 3px;
+    text-decoration: none;
+}
+.language-selector-open A:visited {
+    border-width: 0;
+    color: #396ea2;
+    display: block;
+    padding: 0 3px;
+    text-decoration: none;
+}
+.language-selector-close A:hover {
+    background-color: #def;
+    color: #036;
+}
+.language-selector-close A:focus {
+    background-color: #def;
+    color: #036;
+}
+.language-selector-close A:active {
+    background-color: #def;
+    color: #036;
+}
+.language-selector-open A:hover {
+    background-color: #def;
+    color: #036;
+}
+.language-selector-open A:focus {
+    background-color: #def;
+    color: #036;
+}
+.language-selector-open A:active {
+    background-color: #def;
+    color: #036;
+}
+.language-selector-open LI.lang-separate {
+    border-top: 1px solid #9ab;
+    margin: 2px 0 0;
+}
+.language-selector-open IMG {
+    height: 16px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 16px;
+    z-index: 1;
+}
+.language-selector-close IMG {
+    height: 16px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 16px;
+    z-index: 1;
+}
+.language-selector-alone A:hover {
+    background-color: transparent;
+    color: #396ea2;
+}
+.language-selector-alone {
+    height: 25px;
+}
+.font-size-2 .language-selector-alone {
+    height: 30px;
+}
+.font-size-3 .language-selector-alone {
+    height: 35px;
+}
+.font-size-2 .language-selector-close {
+    width: 140px;
+}
+.font-size-2 .language-selector-open {
+    width: 140px;
+}
+.font-size-2 .language-selector-open LI {
+    width: 138px;
+}
+.font-size-2 .language-selector-close LI.selected {
+    width: 138px;
+}
+.font-size-2 .language-selector-open IMG {
+    top: 2px;
+}
+.font-size-2 .language-selector-close IMG {
+    top: 2px;
+}
+.font-size-3 .language-selector-close {
+    width: 162px;
+}
+.font-size-3 .language-selector-open {
+    width: 162px;
+}
+.font-size-3 .language-selector-open LI {
+    width: 160px;
+}
+.font-size-3 .language-selector-close LI.selected {
+    width: 160px;
+}
+.font-size-3 .language-selector-open IMG {
+    top: 4px;
+}
+.font-size-3 .language-selector-close IMG {
+    top: 4px;
+}
+#path {
+    background-color: #074a8b;
+    color: #fff;
+    font-family: "verdana";
+    font-size: 65%;
+    line-height: 1.6;
+    min-height: 5px;
+    overflow: hidden;
+    padding: 0 0 1px;
+}
+#path UL {
+    padding-left: 10px;
+    position: relative;
+    z-index: 7;
+}
+#path LI {
+    background: url("https://webgate.ec.europa.eu/ECHO/hope/header/images/breadcrumb.gif") no-repeat scroll left center rgba(0, 0, 0, 0);
+    display: inline;
+    padding: 0 0 0 12px;
+    white-space: nowrap;
+}
+#path LI.first {
+    background-image: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+#path A {
+    border-width: 0;
+    color: #fff;
+    text-decoration: none;
+}
+#path A:visited {
+    border-width: 0;
+    color: #fff;
+    text-decoration: none;
+}
+#path A:hover {
+    border-width: 0;
+    color: #fff;
+    text-decoration: underline;
+}
+#path A:focus {
+    border-width: 0;
+    color: #fff;
+    text-decoration: underline;
+}
+#path A:active {
+    border-width: 0;
+    color: #fff;
+    text-decoration: underline;
+}
+#additional-tools {
+    display: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 5px;
+}
+#additional-tools LI {
+    display: inline;
+    float: left;
+    margin: 0 4px 0 0;
+}
+#additional-tools LI.print SPAN.s {
+    background-position: 0 -16px;
+}
+#additional-tools LI.font-decrease SPAN.s {
+    background-position: -32px -16px;
+}
+#additional-tools LI.font-increase SPAN.s {
+    background-position: -16px -16px;
+}
+.js #additional-tools {
+    display: block;
+}
+.layout-noright #additional-tools {
+    float: right;
+    margin: 5px -15px 0 5px;
+    position: relative;
+    top: 0;
+}
+.font-size-1 {
+    font-size: 62.5%;
+}
+.font-size-2 {
+    font-size: 80%;
+}
+.font-size-3 {
+    font-size: 100%;
+}
+}
+#path UL {
+    border-width: 0;
+    font-size: 100%;
+    margin: 0;
+    padding: 0 0 0 10px;
+    vertical-align: baseline;
+}
+.content UL {
+    border-width: 0;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+#banner-site-name SPAN {
+    color: #fff;
+}
+#header {
+    padding: 68px 0 0;
+}
+.ie7 #header {
+    min-height: 58px;
+}
+#top_nav {
+    font-size: 75%;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 18;
+}
+#top_nav .content {
+    float: right;
+    text-align: right;
+}
+UL#services {
+    display: inline;
+    float: left;
+    padding: 0;
+    position: relative;
+    top: 3px;
+}
+UL#services A {
+    font-size: 1em;
+}
+#services A:active {
+    font-size: 1em;
+}
+#services A:visited {
+    font-size: 1em;
+}
+#services A:focus {
+    font-size: 1em;
+}
+#services A:hover {
+    font-size: 1em;
+}
+.ie7 UL#services A {
+    padding: 0 1px 0 4px;
+}
+.ie7 #services A:active {
+    padding: 0 1px 0 4px;
+}
+.ie7 #services A:visited {
+    padding: 0 1px 0 4px;
+}
+.ie7 #services A:focus {
+    padding: 0 1px 0 4px;
+}
+.ie7 #services A:hover {
+    padding: 0 1px 0 4px;
+}
+UL#services LI.first A {
+    background: none repeat scroll 0 0 transparent;
+}
+#langSelect {
+    background: none repeat scroll 0 0 #fff;
+    border-color: #99aabb;
+    border-style: solid;
+    border-width: 1px;
+    color: #396ea2;
+    cursor: pointer;
+    float: none;
+    font-family: Verdana,Arial,Helvetica,"DejaVu Sans",sans-serif;
+    font-size: 0.75em;
+    height: 19px;
+    line-height: 0.75em;
+    margin: 0;
+    padding: 0;
+    width: auto;
+}
+#languageForm SELECT:hover {
+    background: none repeat scroll 0 0 #ddeeff;
+}
+#languageForm SELECT OPTION {
+    background: none repeat scroll 0 0 #fff;
+}
+#languageForm INPUT[type="submit"] {
+    background: none repeat scroll 0 0 #fff;
+    border-color: #99aabb;
+    border-style: solid;
+    border-width: 1px;
+    color: #396ea2;
+    display: inline;
+    font-size: 0.75em;
+    height: 18px;
+    line-height: 0.75em;
+    margin: 0 1px 0 0;
+    padding: 0 5px;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+.ie7 #languageForm INPUT[type="submit"] {
+    padding: 1px 0;
+}
+#banner-flag {
+    height: auto;
+    top: -85px;
+}
+#header #banner-title-text {
+    color: #0065a2;
+    padding-bottom: 3px;
+    padding-left: 248px;
+    padding-right: 10px;
+    position: relative;
+    text-transform: uppercase;
+    top: 0;
+}
+#banner-site-name {
+    background: none repeat scroll 0 0 #0065a2;
+    margin: 0;
+    min-height: 45px;
+    position: relative;
+    width: 100%;
+}
+#banner-site-name SPAN {
+    display: block;
+    font-size: 1.5em;
+    padding: 5px 10px 5px 248px;
+}
+#path UL.reset-list {
+    font-size: 1.2em;
+    position: relative;
+    z-index: 100002;
+}
+#content {
+    margin: 0 10px;
+    padding: 0 5px;
+}
+.ie7 #content {
+    margin-bottom: 0;
+}

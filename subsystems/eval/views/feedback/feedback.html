@@ -1,0 +1,83 @@
+<style>
+#feedbackTabset ul.nav-pills{float:left;width:15%;}
+#feedbackTabset div.tab-content{float:left;width:85%}
+</style>
+
+<uib-tabset active="activeFeedbackContributor" vertical="true" type="pills" id="feedbackTabset">
+    <uib-tab ng-repeat="(contributorKey, contributorValue) in feedbackQuestions.contributors" index="contributorKey" heading="{{contributorValue.FNAME}} {{contributorValue.LNAME}}">
+        <ng-include ng-init="questions=feedbackQuestions.questions; answers=feedbackQuestions.answers[contributorValue.ID];" src="'feedbackQuestionsTemplate'"></ng-include>
+    </uib-tab>
+</uib-tabset>
+
+
+<!-- <div ng-switch="feedbackEditable">
+    <div ng-switch-when="false">
+        <uib-tabset active="activeFeedbackContributor" vertical="true" type="pills" id="feedbackTabset">
+            <uib-tab ng-repeat="(contributorKey, contributorValue) in feedbackQuestions.contributors" index="contributorKey" heading="{{contributorValue.FNAME}} {{contributorValue.LNAME}}">
+                <ng-include ng-init="questions=feedbackQuestions.questions; answers=feedbackQuestions.answers[contributorValue.ID];" src="'feedbackQuestionsTemplate'"></ng-include>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+    <div ng-switch-when="true">
+        <ng-include ng-if="feedbackEditable" ng-init="questions=feedbackQuestions.questions; answers=feedbackQuestions.answers[contributorValue.ID];" src="'feedbackQuestionsTemplate'"></ng-include>
+    </div>
+</div> -->
+
+<script type="text/ng-template" id="feedbackQuestionsTemplate">
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default" ng-repeat="(questionKey, questionValue) in questions">
+            <div class="panel-heading">
+                <div class="row vertical-align">
+                    <div class="col-sm-11">
+                        <label>{{questionValue.QUESTION}}</label>
+                    </div>
+                    <div class="col-sm-1">
+                        <button ng-click="feedbackAnswer(questionKey)" ng-if="viewOrEdit=='edit'" style="width: 80px;">Answer</button>
+                    </div>
+                </div>    
+            </div>
+            <div class="panel-body">{{answers[questionKey].ANSWER}}</div>
+        </div>
+    </div>
+</div>
+</script>
+
+<!-- <div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default" ng-repeat="feedbackQuestion in feedbackQuestions track by $index">
+            <div class="panel-heading">
+                <div class="row vertical-align">
+                    <div class="col-sm-11">
+                        <label>{{feedbackQuestion.QUESTION}}</label>
+                    </div>
+                    <div class="col-sm-1">
+                        <button ng-click="feedbackAnswer($index)" ng-if="viewOrEdit=='edit'" style="width: 80px;">Answer</button>
+                    </div>
+                </div>    
+            </div>
+            <div class="panel-body">{{feedbackQuestion.ANSWER}}</div>
+        </div>
+    </div>
+</div> -->
+
+
+<script type="text/ng-template" id="feedbackDialogTemplate">
+    <div class="ngdialog-message">
+        <h3><span>Feedback Form</span></h3>
+        <div>
+            <label>Answer</label>:
+            <span ng-if="viewOrEdit=='view'">{{dataToPassToDialog.ANSWER}}</span>              
+            <div ng-if="viewOrEdit=='edit'">
+                <textarea ng-model="dataToPassToDialog.ANSWER" name="ANSWER" maxlength="2000" required style="margin: 0px; width: 100%; height: 210px;"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="ngdialog-buttons">
+        <button type="button" ng-if="viewOrEdit=='edit'" class="btn btn-danger float-left pull-left" ng-click="closeThisDialog(2)">Delete</button>
+        <button type="button" ng-if="viewOrEdit=='edit'" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(1)">Save</button>
+        <button type="button" ng-if="viewOrEdit=='view'" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(0)">Close</button>
+    </div>
+</script>
+
+<ng-include ng-init="editButton=navBarEditButton;" src="'navbarBottomTemplate'"></ng-include>

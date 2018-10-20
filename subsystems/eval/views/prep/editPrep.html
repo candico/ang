@@ -1,0 +1,464 @@
+
+
+{{evaType}}
+
+<form name="editPrepForm" id="editPrepForm" class="form-horizontal" novalidate>
+<input type="hidden" name="evaluation_id" id="evaluation_id" value="{{evalData.EVAL_ID}}" />
+
+    <div class="row">  
+        
+        <div class="col-sm-4">  
+            
+            <div class="panel panel-default fieldset-panel">
+            
+            	<div class="panel-body">
+            
+                    <fieldset ng-disabled="viewOrEdit=='view'">
+                        <legend class="scheduler-border">{{ js.KEY_DATA }}</legend> 
+                        <div class="form-group">	
+                            <label for="type_id" class="col-sm-3 control-label"><span class="label label-warning-alt">ID</span></label>     
+                             <div class="col-sm-9 form-control-div label-gap">                      
+                            <p class="form-control-static">{{ evalData.EVAL_ID }}</p>
+                            </div>
+                        </div>  
+                        
+                        <div class="form-group">	
+                            <label for="type_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ js.STATUS }}</span></label>                          
+                             <div class="col-sm-9 form-control-div label-gap"> 
+                            <p class="form-control-static">{{ evalData.STATUS_CODE }}</p>
+                            </div>
+                        </div>  
+                        
+                        <div class="form-group">	
+                            <label for="type_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ js.TYPE }} *</span></label>  
+                            <div class="col-sm-8 form-control-div">   
+
+
+                                <select name="type_id" id="type_id" class="form-control" ng-model="evalData.TYPE_ID" 
+                                ng-options="ref.TYPE_ID as ref.TYPE for ref in evalTypes" required-select></select>
+
+                               <!-- <select 
+                                    name="type_id" 
+                                    id="type_id" 
+                                    ng-options="js[evalType.code] for evalType in data.evalTypes track by evalType.id"
+                                    ng-model="evalType"
+                                    class="form-control"
+                                    required-select>
+                                    <option value=''>{{ js.PLEASE_SELECT }}</option>               
+                                </select>   -->
+                                
+                               <!-- <angucomplete-alt 
+                                    id="type_id"
+                                    input-name="type_id"
+                                    alt-input-name="alt_type_id"
+                                    placeholder="Evaluation Types"
+                                    pause="100"
+                                    selected-object="evalType"
+                                    initial-value="evalType"
+                                    local-data="data.evalTypes"
+                                    search-fields="name"
+                                    title-field="name"
+                                    value-field="id"
+                                    minlength="0"
+                                    input-class="form-control form-control-small"/> -->                               
+                                                            
+                                <div ng-messages="editPrepForm.type_id.$error" class="errors">                  
+                                    <span ng-if="showError({'type_id':'requiredSelect'})" ng-message="requiredSelect">Evaluation type is required</span>                                 
+                                </div>                              
+                            </div>
+                        </div>   
+                        
+                        <div class="form-group">	           
+                            <label class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVAL_PERIOD }} *</span></label>
+                            <ng-include ng-init="dpFromName='eval_start_on'; dpToName='eval_end_on'" class="col-sm-9" style="padding:0" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>
+                            <!-- <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_FROM }} </label> -->
+                            <!-- <ng-include ng-controller="setPrepController" src="'datePicker'" ng-init="nameDP='eval_start_on'"></ng-include> -->
+                            <!-- <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('eval_start_on')}"> 
+                                    <input ng-model="data.eval_start_on" type="text" class="form-control" required euro-date ng-model-options="{ updateOn: 'blur' }" placeholder="dd/mm/yyyy" name="eval_start_on" id="eval_start_on">            
+                                <div ng-messages="editPrepForm.eval_start_on.$error" class="errors">                  
+                                    <span ng-if="showError({'eval_start_on':'required'})" ng-message="required">Start of period is required</span>                                 
+                                    <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                              
+                                </div>    
+                            </div> -->
+                            <!-- <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_UNTIL }}</label> -->
+                            <!-- <ng-include ng-controller="setPrepController" src="'datePicker'" ng-init="nameDP='eval_end_on'"></ng-include> -->
+                            <!-- <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('eval_end_on')}"> 
+                                    <input ng-model="data.eval_end_on" type="text" class="form-control" required euro-date ng-model-options="{ updateOn: 'blur' }" placeholder="dd/mm/yyyy" name="eval_end_on" id="eval_end_on">
+                                <div ng-messages="editPrepForm.eval_end_on.$error" class="errors">                  
+                                    <span ng-if="showError({'eval_end_on':'required'})" ng-message="required">End of period is required</span>    
+                                    <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                              
+                                </div>
+                            </div>  -->
+                        </div> 
+                        
+  <!--                      <div class="form-group">	           
+                            <label class="col-sm-3 control-label"><span class="label label-primary-alt">Eval Period</span></label> 
+                            <div class="col-sm-8 form-control-div">                      
+                                <input type="text" name="eval_period" value="" class="form-control"/>
+                                <div ng-messages="editPrepForm.eval_period.$error" class="errors"> 
+                                    <span ng-if="showError({'eval_period':'required'})" ng-message="required">Evaluation Period is required</span>   
+                                    <span ng-message="euroDate">Please use dd/mm/yyyy format</span> 
+                                </div> 
+                            </div> 
+                        </div>  -->                   
+                                                              
+                    </fieldset>  
+                
+                </div> <!--end panel body-->  
+                
+            </div>  <!--end panel --> 
+            
+            <div class="panel panel-default fieldset-panel">
+            
+            	<div class="panel-body">
+            
+                    <fieldset ng-disabled="viewOrEdit=='view'">                
+                        <legend class="scheduler-border">{{ lib.TIMETABLE }}</legend> 
+                        
+                        <div class="form-group">	           
+                            <label class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.PREP_PHASE }} *</span></label>
+                            <ng-include ng-init="dpFromName='prep_phase_start_on'; dpToName='prep_phase_end_on'" class="col-sm-9" style="padding:0" src="'datePickerRange'" ng-controller="dateRangePickerCtrl">
+
+                              <!-- <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_FROM }}</label> -->
+                              <!-- <ng-include ng-controller="setPrepController" src="'datePicker'" ng-init="nameDP='prep_phase_start_on'"></ng-include> -->
+                              <!-- <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('prep_phase_start_on')}"> 
+                                    <input ng-model="data.prep_phase_start_on" type="text" class="form-control" required euro-date ng-model-options="{ updateOn: 'blur' }" placeholder="dd/mm/yyyy" name="prep_phase_start_on" id="prep_phase_start_on">    
+                                    <div ng-messages="editPrepForm.prep_phase_start_on.$error" class="errors">   
+                                        <span ng-if="showError({'prep_phase_start_on':'required'})" ng-message="required">Start of period is required</span> 
+                                        <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                              
+                                    </div>                                            
+                                </div> -->
+                                <!-- <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_UNTIL }}</label> -->
+                                <!-- <ng-include ng-controller="setPrepController" src="'datePicker'" ng-init="nameDP='prep_phase_end_on'"></ng-include> -->
+                                 <!-- <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('prep_phase_end_on')}"> 
+                                    <input ng-model="data.prep_phase_end_on" type="text" class="form-control" required euro-date ng-model-options="{ updateOn: 'blur' }" placeholder="dd/mm/yyyy" name="prep_phase_end_on" id="prep_phase_end_on">
+                                  <div ng-messages="editPrepForm.prep_phase_end_on.$error" class="errors"> 
+                                          <span ng-if="showError({'prep_phase_end_on':'required'})" ng-message="required">End of period is required</span>   
+                                        <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                              
+                                    </div>                                
+                                </div> -->  
+                        </div>  
+                        
+                        <div class="form-group">	           
+                            <label class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.ASSESS_PHASE }} *</span></label>
+                            <ng-include ng-init="dpFromName='assess_phase_start_on'; dpToName='assess_phase_end_on'" class="col-sm-9" style="padding:0" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>
+                              <!-- <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_FROM }}</label> -->
+                              <!-- <ng-include ng-controller="setPrepController" src="'datePicker'" ng-init="nameDP='assess_phase_start_on'"></ng-include> -->
+                                <!-- <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('assess_phase_start_on')}"> 
+                                    <input ng-model="data.assess_phase_start_on" type="text" class="form-control" required euro-date ng-model-options="{ updateOn: 'blur' }" placeholder="dd/mm/yyyy" name="assess_phase_start_on" id="assess_phase_start_on">   
+                                  <div ng-messages="editPrepForm.assess_phase_start_on.$error" class="errors">   
+                                      <span ng-if="showError({'assess_phase_start_on':'required'})" ng-message="required">Start of period is required</span> 
+                                        <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                               
+                                    </div>                                             
+                                </div> -->
+                                <!-- <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_UNTIL }}</label> -->
+                                <!-- <ng-include ng-controller="setPrepController" src="'datePicker'" ng-init="nameDP='assess_phase_end_on'"></ng-include> -->
+                                <!-- <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('assess_phase_end_on')}"> 
+                                    <input ng-model="data.assess_phase_end_on" type="text" class="form-control" required euro-date placeholder="dd/mm/yyyy" name="assess_phase_end_on" id="assess_phase_end_on">
+                                    <div ng-messages="editPrepForm.assess_phase_end_on.$error" class="errors">   
+                                        <span ng-if="showError({'assess_phase_end_on':'required'})" ng-message="required">End of period is required</span> 
+                                        <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                              
+                                    </div>
+                                </div> -->
+                        </div>                      
+                        
+                        <div class="form-group">	           
+                            <label class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.RATING_PHASE }} *</span></label>  
+                            <ng-include ng-init="dpFromName='rating_phase_start_on'; dpToName='rating_phase_end_on'" class="col-sm-9" style="padding:0" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>                            
+                            <!-- <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_FROM }}</label> -->
+                              <!-- <ng-include ng-controller="setPrepController" src="'datePicker'" ng-init="nameDP='rating_phase_start_on'"></ng-include> -->
+                                <!-- <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('rating_phase_start_on')}"> 
+                                    <input ng-model="data.rating_phase_start_on" type="text" class="form-control" required euro-date ng-model-options="{ updateOn: 'blur' }" placeholder="dd/mm/yyyy" name="rating_phase_start_on" id="rating_phase_start_on">   
+                                  <div ng-messages="editPrepForm.rating_phase_start_on.$error" class="errors">   
+                                      <span ng-if="showError({'rating_phase_start_on':'required'})" ng-message="required">Start of period is required</span> 
+                                        <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                              
+                                    </div>                                              
+                                </div> -->  
+                                <!-- <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_UNTIL }}</label> -->
+                                <!-- <ng-include ng-controller="setPrepController" src="'datePicker'" ng-init="nameDP='rating_phase_end_on'"></ng-include> -->
+                                 <!-- <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('rating_phase_end_on')}"> 
+                                    <input ng-model="data.rating_phase_end_on" type="text" class="form-control" required euro-date placeholder="dd/mm/yyyy" name="rating_phase_end_on" id="rating_phase_end_on">
+                                  <div ng-messages="editPrepForm.rating_phase_end_on.$error" class="errors"> 
+                                  <span ng-if="showError({'rating_phase_end_on':'required'})" ng-message="required">End of period is required</span>   
+                                        <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                              
+                                    </div>                                 
+                                </div>  -->
+                        </div>   
+                        
+                        <div class="form-group">	           
+                            <label class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.CLOSING_PHASE }} *</span></label>
+                            <ng-include ng-init="dpFromName='closing_phase_start_on'; dpToName='closing_phase_end_on'" class="col-sm-9" style="padding:0" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>                              
+                              <!-- <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_FROM }}</label>
+                                <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('closing_phase_start_on')}"> 
+                                    <input ng-model="data.closing_phase_start_on" type="text" class="form-control" required euro-date ng-model-options="{ updateOn: 'blur' }" placeholder="dd/mm/yyyy" name="closing_phase_start_on" id="closing_phase_start_on"> 
+                                  <div ng-if="showError({'closing_phase_start_on':'required'})" ng-messages="editPrepForm.closing_phase_start_on.$error" class="errors">   
+                                  <span ng-message="required">Start of period is required</span> 
+                                        <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                              
+                                    </div>                                                
+                                </div> 
+                                <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_UNTIL }}</label>
+                                 <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('closing_phase_end_on')}"> 
+                                    <input ng-model="data.closing_phase_end_on" type="text" class="form-control" required euro-date placeholder="dd/mm/yyyy" name="closing_phase_end_on" id="closing_phase_end_on">
+                                  <div ng-messages="editPrepForm.closing_phase_end_on.$error" class="errors">   
+                                      <span ng-if="showError({'closing_phase_end_on':'required'})" ng-message="required">Start of period is required</span> 
+                                        <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                              
+                                    </div>                                 
+                                </div>   -->
+                        </div>    
+                                                       
+                        <div class="form-group">	           
+                            <label class="col-sm-3 control-label"><span class="label label-primary-alt">{{ lib.PROBATION_PHASE }}</span></label>  
+                            <ng-include ng-init="dpFromName='probation_phase_start_on'; dpToName='probation_phase_end_on'" class="col-sm-9" style="padding:0" src="'datePickerRange'" ng-controller="dateRangePickerCtrl"></ng-include>
+                             <!-- <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_FROM }}</label>
+                                <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('probation_phase_start_on')}"> 
+                                    <input ng-model="data.probation_phase_start_on" type="text" class="form-control" required euro-date ng-model-options="{ updateOn: 'blur' }" placeholder="dd/mm/yyyy" name="probation_phase_start_on" id="probation_phase_start_on">  
+                                  <div ng-messages="editPrepForm.probation_phase_start_on.$error" class="errors">  
+                                  <span ng-if="showError({'probation_phase_start_on':'required'})" ng-message="required">Start of period is required</span>  
+                                        <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                              
+                                    </div>                                               
+                                </div>  
+                                <label class="col-sm-1 control-label" style="font-weight:normal; font-style:italic;">{{ lib.TIME_UNTIL }}</label>
+                                 <div class="col-sm-3 form-control-div" ng-class="{'has-error':!isValid('probation_phase_end_on')}"> 
+                                    <input ng-model="data.probation_phase_end_on" type="text" class="form-control" required euro-date placeholder="dd/mm/yyyy" name="probation_phase_end_on" id="probation_phase_end_on">
+                                  <div ng-messages="editPrepForm.probation_phase_end_on.$error" class="errors"> 
+                                      <span ng-if="showError({'probation_phase_end_on':'required'})" ng-message="required">End of period is required</span>   
+                                        <span ng-message="euroDate">Please use dd/mm/yyyy format</span>                              
+                                    </div>                                  
+                                </div>   -->
+                        </div>                                                                              
+                        
+                    </fieldset>
+                
+                </div> <!--end panel body-->  
+                
+            </div>  <!--end panel -->   
+        
+        </div>  <!--end col 1-->  
+        
+        <div class="col-sm-4">
+        
+            <div class="panel panel-default fieldset-panel">
+            
+            	<div class="panel-body">			                                  
+            
+                    <fieldset ng-disabled="viewOrEdit=='view'">
+                        <legend class="scheduler-border">{{ lib.PARTICIPANTS }}</legend> 
+                        
+                        <div class="form-group" ng-class="{'has-error':!isValid('evaluee_id')}">	
+                            <label for="evaluee_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVM_EVALUEE }}</span></label>  
+                            <div class="col-sm-8 form-control-div">
+
+                                <select 
+                                    name="evaluee_id" 
+                                    id="evaluee_id" 
+                                    ng-options="evaluee.name for evaluee in data.evaluees track by evaluee.user_id"
+                                    ng-model="evaluee"
+                                    class="form-control"
+                                    required-select multi="noPartsDup" pos=1>
+                                    <option value=''>{{ js.PLEASE_SELECT }}</option>              
+                                </select>
+
+                                <div ng-messages="editPrepForm.evaluee_id.$error" class="errors">                  
+                                    <span ng-if="showError({'evaluee_id':'requiredSelect'})" ng-message="requiredSelect">Evaluee is required</span> 
+                                    <span ng-if="showError({'evaluee_id':'multi'})" ng-message="multi">Please remove duplicates in participants</span> 
+                                </div>                            
+                            </div>
+                        </div>                     
+                        
+                        <div class="form-group" ng-class="{'has-error':!isValid('supervisor_id')}">	                   
+                            <label for="supervisor_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVM_SUPERVISOR }} *</span></label>  
+                            <div class="col-sm-8 form-control-div">                              
+                                <select 
+                                    name="supervisor_id" 
+                                    id="supervisor_id" 
+                                    ng-options="supervisor.name for supervisor in data.supervisors track by supervisor.user_id"
+                                    ng-model="supervisor"
+                                    class="form-control"
+                                    required-select multi="noPartsDup" pos=2
+                                >
+                                     <option value=''>{{ js.PLEASE_SELECT }}</option>              
+                                </select>   
+                                <div ng-messages="editPrepForm.supervisor_id.$error" class="errors">  
+                                    <span ng-if="showError({'supervisor_id':'requiredSelect'})" ng-message="requiredSelect">Supervisor is required</span>  
+                                    <span ng-if="showError({'supervisor_id':'multi'})" ng-message="multi">Please remove duplicates in participants</span> 
+                                </div>                             
+                            </div>
+                        </div>  
+                        
+                        <div class="form-group" ng-class="{'has-error':!isValid('contributor_1_id')}">	
+                            <label for="contributor_1_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVM_CONTRIBUTOR }} 1 *</span></label>  
+                            <div class="col-sm-8 form-control-div">                              
+                                <select 
+                                    name="contributor_1_id" 
+                                    id="contributor_1_id" 
+                                    ng-options="contributor.name for contributor in data.contributors track by contributor.user_id"
+                                    ng-model="contributor_1"
+                                    class="form-control"
+                                    required-select multi="noPartsDup" pos=3
+                                >
+                                    <option value=''>{{ js.PLEASE_SELECT }}</option>              
+                                </select>    
+                                <div ng-messages="editPrepForm.contributor_1_id.$error" class="errors">   
+                                    <span ng-if="showError({'contributor_1_id':'requiredSelect'})" ng-message="requiredSelect">At least one contributor is required</span> 
+                                    <span ng-if="showError({'contributor_1_id':'multi'})" ng-message="multi">Please remove duplicates in participants</span> 
+                                </div>                             
+                            </div>
+                        </div>        
+                        
+                        <div class="form-group" ng-class="{'has-error':!isValid('contributor_2_id')}">	
+                            <label for="contributor_2_id" class="col-sm-3 control-label"><span class="label label-primary-alt">{{ lib.EVM_CONTRIBUTOR }} 2</span></label>  
+                            <div class="col-sm-8 form-control-div">                              
+                                <select 
+                                    name="contributor_2_id" 
+                                    id="contributor_2_id" 
+                                    ng-options="contributor.name for contributor in data.contributors track by contributor.user_id"
+                                    ng-model="contributor_2"
+                                    class="form-control"
+                                    multi="noPartsDup" pos=4
+                                >
+                                     <option value=''>{{ js.PLEASE_SELECT }}</option>              
+                                </select>    
+                                <div ng-messages="editPrepForm.contributor_2_id.$error" class="errors">   
+                                    <span ng-if="showError({'contributor_2_id':'multi'})" ng-message="multi">Please remove duplicates in participants</span> 
+                                </div>                             
+                            </div>
+                        </div>      
+                        
+                        <div class="form-group" ng-class="{'has-error':!isValid('contributor_3_id')}">	
+                            <label for="contributor_3_id" class="col-sm-3 control-label"><span class="label label-primary-alt">{{ lib.EVM_CONTRIBUTOR }} 3</span></label>  
+                            <div class="col-sm-8 form-control-div">                              
+                               <select 
+                                    name="contributor_3_id" 
+                                    id="contributor_3_id" 
+                                    ng-options="contributor.name for contributor in data.contributors track by contributor.user_id"
+                                    ng-model="contributor_3"
+                                    class="form-control"
+                                    multi="noPartsDup" pos=5
+                                >
+                                    <option value=''>{{ js.PLEASE_SELECT }}</option>              
+                                </select>    
+                                <div ng-messages="editPrepForm.contributor_3_id.$error" class="errors">   
+                                    <span ng-if="showError({'contributor_3_id':'multi'})" ng-message="multi">Please remove duplicates in participants</span> 
+                                </div>                             
+                            </div>
+                        </div>       
+                        
+                        <div class="form-group" ng-class="{'has-error':!isValid('preparator_id')}">	
+                            <label for="preparator_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVM_PREPARATOR }}</span></label>  
+                            <div class="col-sm-8 form-control-div">                              
+                                <select 
+                                    name="preparator_id" 
+                                    id="preparator_id" 
+                                    ng-options="preparator.name for preparator in data.preparators track by preparator.user_id"
+                                    ng-model="preparator"
+                                    class="form-control"
+                                    required-select multi="noPartsDup" pos=6
+                                >
+                                     <option value=''>{{ js.PLEASE_SELECT }}</option>              
+                                </select>   
+                                <div ng-messages="editPrepForm.preparator_id.$error" class="errors">   
+                                    <span ng-if="showError({'preparator_id':'requiredSelect'})" ng-message="requiredSelect">Preparator is required</span> 
+                                    <span ng-if="showError({'preparator_id':'multi'})" ng-message="multi">Please remove duplicates in participants</span> 
+                                </div>                              
+                            </div>
+                        </div>     
+                        
+                        <div class="form-group" ng-class="{'has-error':!isValid('authorizer_id')}">	
+                            <label for="authorizer_id" class="col-sm-3 control-label"><span class="label label-warning-alt">{{ lib.EVM_AUTHORIZER }}</span></label>  
+                            <div class="col-sm-8 form-control-div">                              
+                                <select 
+                                    name="authorizer_id" 
+                                    id="authorizer_id" 
+                                    ng-options="authorizer.name for authorizer in data.authorizers track by authorizer.user_id"
+                                    ng-model="authorizer"
+                                    class="form-control"
+                                    required-select multi="noPartsDup" pos=7
+                                >
+                                    <option value=''>{{ js.PLEASE_SELECT }}</option>               
+                                </select>    
+                                <div ng-messages="editPrepForm.authorizer_id.$error" class="errors">   
+                                    <span ng-if="showError({'authorizer_id':'requiredSelect'})" ng-message="requiredSelect">Head of Office is required</span> 
+                                    <span ng-if="showError({'authorizer_id':'multi'})" ng-message="multi">Please remove duplicates in participants</span> 
+                                </div>                            
+                            </div>                       
+                        </div>                                                                       
+                        
+                    </fieldset>
+                
+                 </div> <!--end panel body-->  
+                
+            </div>  <!--end panel --> 
+        
+        </div>  <!--end col 2-->          
+        
+        <div class="col-sm-4">
+            <div class="panel panel-default fieldset-panel">
+                <div class="panel-heading">
+                    <label>{{ lib.DOCUMENTS_LIBRARY }}</label>
+                    <button ng-if="viewOrEdit=='edit'" ngf-select="uploadDocument($file)" class="float-right pull-right"><i class="fa fa-plus"></i></button>
+                </div>
+            	<div class="panel-body">
+                    <fieldset ng-disabled="viewOrEdit=='view'">
+                        <style>.dragover { border: dashed blue; }</style>
+                        <div ngf-drop="uploadDocument($file)" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="false" ngf-pattern="'*/*,application/pdf'">    
+                            <ng-include ng-init="remove=true" src="'documentListTemplate'"></ng-include>
+                        </div>
+                        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>                                                                               
+                    </fieldset>
+                 </div>
+            </div>        
+        </div>
+
+    </div> <!--end row-->
+    
+
+    <ng-include ng-init="stateName='evaluations.details.preparation'" src="'navbarBottomTemplate'"></ng-include>
+
+<!--</div>--> <!--end panel-->
+
+</form>
+
+<!-- <script>
+
+$('input[name="eval_period"]').daterangepicker({
+    "locale": {
+        "format": "DD/MM/YYYY",
+        "separator": " ",
+        "applyLabel": "Apply",
+        "cancelLabel": "Cancel",
+        "fromLabel": "From",
+        "toLabel": "To",
+        "customRangeLabel": "Custom",
+        "weekLabel": "W",
+        "daysOfWeek": [
+            "Su",
+            "Mo",
+            "Tu",
+            "We",
+            "Th",
+            "Fr",
+            "Sa"
+        ],
+        "monthNames": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ],
+        "firstDay": 1
+    },
+    "startDate": "01/01/2018",
+    "endDate": "31/12/2018"
+}, function(start, end, label) {
+  console.log("New date range selected: ' + start.format('DD/MM/YYYY') + ' to ' + end.format('DD/MM/YYYY') + ' (predefined range: ' + label + ')");
+}); 
+
+</script> -->

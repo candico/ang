@@ -1,0 +1,91 @@
+<style>
+#followUpTabset ul.nav-pills{float:left;width:15%;}
+#followUpTabset div.tab-content{float:left;width:85%}
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label class="float-left pull-left">Request Follow-Up</label>
+                        <!-- <button ng-click="insertFollowUp()" ng-if="$stateParams.viewEdit=='edit' && navBarEditButton" class="float-right pull-right" style="width: 110px;">Add new</button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body" style="padding: 0;">
+                <uib-tabset active="activeFollowUpParticipant" vertical="true" type="pills" id="followUpTabset">
+                    <uib-tab ng-repeat="(followKey, followValue) in followUps" index="followKey" heading="{{followValue[0].FNAME}} {{followValue[0].LNAME}}">
+                        <ng-include ng-init="items=followValue; who=followKey;" src="'followUpTemplate'"></ng-include>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="followUpTemplate">
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th width="10%">Type</th>
+            <th width="30%">Description</th>
+            <th width="50%">Resolution</th>
+            <th width="10%">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>  
+        <tr class="clickable-row" ng-repeat="item in items track by $index">
+            <td>{{item.FOLLOWUP_TYPE}}</td>
+            <td>{{item.DESCRIPTION}}</td>
+            <td>{{item.RESOLUTION}}</td>
+            <td>
+                <span ng-if="$stateParams.viewEdit=='edit' && item.ID>0"><button ng-click="openDialog(who, $index)">edit</button></span>
+                <span ng-if="$stateParams.viewEdit=='edit' && item.ID==0 && who==$resolve.userData.user_id"><button ng-click="insertFollowUp(who, $index)">Add new</button></span>
+                <!-- <span ng-if="$stateParams.viewEdit=='view'"><button ng-click="openDialog(index)">view</button></span> -->
+            </td>
+        </tr>  
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/ng-template" id="followUpDialogTemplate">
+    <div class="ngdialog-message">
+        <h3><span>Request Follow-Up</span></h3>
+        <div>
+            <div>
+                <label>Type</label>:
+                <span>{{dataToPassToDialog.FOLLOWUP_TYPE}}</span>
+                <!-- <label class="btn btn-default" ng-repeat="followUpType in followUpTypes">
+                    <input type="radio" name="TYPE_ID" ng-model="dataToPassToDialog.TYPE_ID" value="{{followUpType.ID}}"> {{followUpType.FOLLOWUP_TYPE}}
+                </label> -->
+            </div>
+            
+            <div>
+                <label>Description</label>:
+                <span ng-if="$stateParams.viewEdit=='view'">{{dataToPassToDialog.DESCRIPTION}}</span>
+                <div ng-if="$stateParams.viewEdit=='edit'">
+                    <textarea ng-model="dataToPassToDialog.DESCRIPTION" name="DESCRIPTION" maxlength="2000" required style="margin: 0px; width: 100%; height: 210px;"></textarea>
+                </div>
+            </div>
+
+            <div>
+                <label>Resolutions</label>:
+                <span ng-if="$stateParams.viewEdit=='view'">{{dataToPassToDialog.RESOLUTION}}</span>              
+                <div ng-if="$stateParams.viewEdit=='edit'">
+                    <textarea ng-model="dataToPassToDialog.RESOLUTION" name="RESOLUTION" maxlength="2000" required style="margin: 0px; width: 100%; height: 210px;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ngdialog-buttons">
+        <button type="button" ng-if="$stateParams.viewEdit=='edit'" class="btn btn-danger float-left pull-left" ng-click="closeThisDialog(2)">Delete</button>
+        <button type="button" ng-if="$stateParams.viewEdit=='edit'" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(1)">Save</button>
+        <button type="button" ng-if="$stateParams.viewEdit=='view'" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(0)">Close</button>
+    </div>
+</script>
+
+<ng-include ng-init="editButton=navBarEditButton;" src="'navbarBottomTemplate'"></ng-include>
