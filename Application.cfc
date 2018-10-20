@@ -45,6 +45,7 @@ component extends="framework.one" accessors="true" {
             break;
 		case("local.ec-home"): 
 			This.mappings[ "/" ] = "C:\ColdFusion10\cfusion\wwwroot\";  
+            variables.Environment = "dev";
 			break;
     }
     
